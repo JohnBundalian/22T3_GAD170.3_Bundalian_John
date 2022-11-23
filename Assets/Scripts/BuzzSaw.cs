@@ -9,7 +9,7 @@ namespace JohnBundalian
         // Start is called before the first frame update
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("Buzz Saw gives Half Damage to Player Character.");
+            Debug.Log("Buzz kills Character");
         }
         
         // Update is called once per frame
