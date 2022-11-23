@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace JohnBundalian
 {
-    public class Brambles : MonoBehaviour
+    public class Imposter : MonoBehaviour
     {
         // Start is called before the first frame update
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("Brambles Has Been Collided with.");
+            Debug.Log("Imposter Killed Player Character.");
         }
-        
+
         // Update is called once per frame
         void Update()
         {
