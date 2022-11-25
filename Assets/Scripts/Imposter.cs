@@ -6,17 +6,16 @@ namespace JohnBundalian
 {
     public class Imposter : MonoBehaviour
     {
-        // Start is called before the first frame update
-        private void OnCollisionEnter(Collision collision)
+       
+        private void OnCollisionEnter(Collision other)
         {
-            Debug.Log("Imposter Killed Player Character.");
+            if (other.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("Imposter Killed Player Character.");
+            }
+            
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }
 

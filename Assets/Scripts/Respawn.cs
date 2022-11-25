@@ -6,19 +6,21 @@ namespace JohnBundalian
 {
     public class Respawn : MonoBehaviour
     {
-        void update()
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                // Do the thing.
-                // Game object.
+        [SerializeField] GameObject player;
+        [SerializeField] Transform spawnPoint;
+        [SerializeField] float spawnValue;
 
+        private void Update()
+        {
+            if(player.transform.position.y < -spawnValue)
+            {
+                RespawnPoint();
             }
         }
-
+        void RespawnPoint()
+        {
+            transform.position = spawnPoint.position;
+        }
     }
-
-    
-
 }
 
