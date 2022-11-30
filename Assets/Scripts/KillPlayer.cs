@@ -8,14 +8,14 @@ namespace JohnBundalian
     public class KillPlayer : MonoBehaviour
     {
         // Variables
-        public int Respawn;
+        private int respawnSceneIndex;
        
          void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
                 Debug.Log("Killzone Triggered.");
-                SceneManager.LoadScene(Respawn);
+                SceneManager.LoadScene(respawnSceneIndex);
             }
         }
     }
