@@ -13,6 +13,6 @@ public class TransientBlockActivator : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        TransientBlockActivator[i].TurnTangible();
+        // TransientBlockActivator[i].TurnTangible();
     }
 }
