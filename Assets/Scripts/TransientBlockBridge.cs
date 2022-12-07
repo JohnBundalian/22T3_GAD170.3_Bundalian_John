@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace JohnBundalian
@@ -21,25 +23,27 @@ namespace JohnBundalian
         [SerializeField] private Material tangibleMaterial;
         [SerializeField] private Material intangibleMaterial;
 
+        // Hold down Windows Key + . Key for emojis
+        // Start is called before the first frame update
+        // When subscribed to the event.
+
         private void Start()
         {
             InTurnTangible();
         }
 
-        private void TurnTangible()
+        private void OnEnable()
         {
-            if (block.GetComponent<MeshCollider>().enabled == true)
-            {
-                // ... disable the box collider.
-                block.GetComponent<MeshCollider>().enabled = false;
-
-                // ... and change the material to "Intangible".
-                block.GetComponent<MeshRenderer>().material = intangibleMaterial;
-
-            }
+            EventsManager.OnTransientBlockActivatorEvent += TurnTangible;
         }
 
-        private void InTurnTangible()
+        // When unsubsribed to the event.
+        private void OnDisable()
+        {
+            EventsManager.OnTransientBlockActivatorEvent -= TurnTangible;
+        }
+
+        private void TurnTangible()
         {
             if (block.GetComponent<MeshCollider>().enabled == false)
             {
@@ -48,6 +52,19 @@ namespace JohnBundalian
 
                 // ... and change the material to "Intangible".
                 block.GetComponent<MeshRenderer>().material = tangibleMaterial;
+
+            }
+        }
+
+        private void InTurnTangible()
+        {
+            if (block.GetComponent<MeshCollider>().enabled == true)
+            {
+                // ... disable the box collider.
+                block.GetComponent<MeshCollider>().enabled = false;
+
+                // ... and change the material to "Intangible".
+                block.GetComponent<MeshRenderer>().material = intangibleMaterial;
 
             }
         }
