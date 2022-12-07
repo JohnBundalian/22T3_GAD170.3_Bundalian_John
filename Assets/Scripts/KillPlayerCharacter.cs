@@ -10,26 +10,28 @@ namespace JohnBundalian
         bool PlayerKilled = false;
 
         // Colliding with gameObject that contains script will allow on collision trigger to action.
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Player"))
             {
                 PlayerKilled = true;
                 Debug.Log("Private void OnCollisionEnter - Harzard Killed Player Character.");
-            }            
+            }
         }
-        private void OnCollisionExit(Collision other)
+
+        // After colliding and respawning resets bool varible to allow the cycle to continue.
+        private void OnTriggerExit(Collider other)
         {
             if (other.gameObject.CompareTag("Player"))
-            { 
+            {
                 PlayerKilled = false;
                 Debug.Log("Private void OnCollisionEnter - Hazard Killed Player Character.");
                 // When leaving area giving instructions to impact the named boolian variable to false not allowing
                 // the Button to be interacted with any more while outside of area.
                 // Informs to see if Trigger Area is left.
             }
-
         }
+
         private void Update()
         {
             // Input key for button interation that is conditioned to a boolian.
