@@ -15,7 +15,7 @@ namespace JohnBundalian
         private void OnTriggerEnter(Collider other)
         {
             // Informs to see if Trigger Area is entered.
-            Debug.Log("On Trigger Enter");
+            Debug.Log("On Collision Enter");
             // When in area giving instructions to impact the named boolian
             // variable to true allowing Button to be interacted with.
             Panel = true;
@@ -27,6 +27,7 @@ namespace JohnBundalian
             if (Input.GetKeyDown(KeyCode.E) && Panel==true) // && boolian==true )
             {
                 // Required input from Player to identify appropiate Key has been pressed by Player.
+                EventsManager.OnTransientBlockActivatorEvent?.Invoke();
                 Debug.Log("E Pressed to action");
             }
         }
@@ -35,7 +36,7 @@ namespace JohnBundalian
         private void OnTriggerExit(Collider other)
         {
             // Informs to see if Trigger Area is left.
-            Debug.Log("Off Trigger Exit");
+            Debug.Log("Off Collision Exit");
             // When leaving area giving instructions to impact the named boolian variable to false not allowing
             // the Button to be interacted with any more while outside of area.
             Panel = false;

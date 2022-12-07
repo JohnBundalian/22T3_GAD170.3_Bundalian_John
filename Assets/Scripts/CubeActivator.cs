@@ -8,83 +8,82 @@ namespace JohnBundalian
     public class CubeActivator : MonoBehaviour
     {
         // Have bool events for triger activator
-        [SerializeField] private bool isPlayerCharacterNearby = false;
+        [SerializeField] private bool PlayerCharacterInTriggerArea = false;
+        // If Player is killed by Imposter - TESTING
+        [SerializeField] bool PlayerKilled = false;
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.name == "Player Character")
+            if (other.gameObject.name == "Player")
             {
-                isPlayerCharacterNearby = true;
+                PlayerCharacterInTriggerArea = true;
             }
 
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.name == "Player Character")
+            if (other.gameObject.name == "Player")
             {
-                isPlayerCharacterNearby = false;
+                PlayerCharacterInTriggerArea = false;
             }
 
         }
 
-        // If the player Presses E and Is in the area this bool conditnal will allow the certain switch to be activated.
-        /// <summary>
-        /// 
-        /// void update ()
-        /// if (Input.GetKeyDown(KeyCode.E) && isPlayerCharacterNearby == true)
-        /// {
-        ///                 EventsManager.OnTransientBlockActivatorEvent?.Invoke();
-        ///                 Debug.Log("E has been pressed");
-        /// }
-        /// 
-        /// </summary>
-
         // points to note conidtionals 
 
         //update is called once per frame.
-        private void Update()
+        public void Update()
         {
+            // If Player is killed by Imposter - TESTING
+            if (PlayerKilled == true)
+            {
+                EventsManager.OnRespawning?.Invoke();
+            }
+
+            // If the player Presses E and Is in the area this bool conditnal will allow the certain switch to be activated.
+            if (Input.GetKeyDown(KeyCode.E) && PlayerCharacterInTriggerArea == true)
+            {
+                EventsManager.OnTransientBlockActivatorEvent?.Invoke();
+                Debug.Log("Trigger - Events Manager called Event - OnTransientBlockActivatorEvent");
+            }
+
             // if (Input.GetKeyDown(KeyCode.E)) if pressed down will count during frames.
             // if (Input.GetKeyUp(KeyCode.E)) if releaseed will count during frames.
             // if (Input.GetKeyHeld(KeyCode.E)) if held down will count during frames.
             // if (Input.GetKey(KeyCode.E)) combines Down and held together during the frames.
 
             // If player presses E
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.P))
             {
                 // Announces the events for the cubes.
                 // ? required if its calling the event.
                 EventsManager.OnColourChangeEvent?.Invoke();
                 EventsManager.OnTeleportEvent?.Invoke();
-                EventsManager.OnTransientBlockActivatorEvent?.Invoke();
-                Debug.Log("E has been pressed");
+                Debug.Log("P has been pressed");
             }
 
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.P))
             {
                 // Announces the events for the cubes.
                 // ? required if its calling the event.
                 EventsManager.OnColourChangeEvent?.Invoke();
                 EventsManager.OnTeleportEvent?.Invoke();
-                EventsManager.OnTransientBlockActivatorEvent?.Invoke();
-                Debug.Log("E has been released");
+                Debug.Log("P has been released");
             }
 
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.P))
             {
                 // Announces the events for the cubes.
                 // ? required if its calling the event.
                 EventsManager.OnColourChangeEvent?.Invoke();
                 EventsManager.OnTeleportEvent?.Invoke();
-                EventsManager.OnTransientBlockActivatorEvent?.Invoke();
-                Debug.Log("E Pressed");
+                Debug.Log("P Pressed");
             }
-            
+
 
 
         }
 
     }
 }
-

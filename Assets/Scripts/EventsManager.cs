@@ -16,6 +16,7 @@ namespace JohnBundalian
         public static VoidDelegate OnTeleportEvent;
         public static VoidDelegate OnColourChangeEvent;
         public static VoidDelegate OnTransientBlockActivatorEvent;
+        public static VoidDelegate OnRespawning;
 
     }
 

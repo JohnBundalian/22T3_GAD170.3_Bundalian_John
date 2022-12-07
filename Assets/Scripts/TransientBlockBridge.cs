@@ -29,34 +29,41 @@ namespace JohnBundalian
 
         private void Start()
         {
-            InTurnTangible();
+            TurnInTangible();
+            Debug.Log(" Intangiable State - Started ");
         }
 
         private void OnEnable()
         {
             EventsManager.OnTransientBlockActivatorEvent += TurnTangible;
+            Debug.Log(" Event Manager Triggered - Subscribed ");
         }
 
         // When unsubsribed to the event.
         private void OnDisable()
         {
             EventsManager.OnTransientBlockActivatorEvent -= TurnTangible;
+            Debug.Log(" Event Manager Triggered - Unsubscribed ");
         }
 
+        // Mechanic 4 Hollowgram bridge.
         private void TurnTangible()
         {
+            // Condition to swtich from opposite state.
             if (block.GetComponent<MeshCollider>().enabled == false)
             {
-                // ... disable the box collider.
+                //Enable MeshCollider to allow Player Character to tranverse onto block.
                 block.GetComponent<MeshCollider>().enabled = true;
 
-                // ... and change the material to "Intangible".
+                //Visually represents the state of the block.
                 block.GetComponent<MeshRenderer>().material = tangibleMaterial;
+
+                Debug.Log(" If condition triggered - Turn Tangible ");
 
             }
         }
 
-        private void InTurnTangible()
+        private void TurnInTangible()
         {
             if (block.GetComponent<MeshCollider>().enabled == true)
             {
@@ -65,6 +72,8 @@ namespace JohnBundalian
 
                 // ... and change the material to "Intangible".
                 block.GetComponent<MeshRenderer>().material = intangibleMaterial;
+
+                Debug.Log(" If condition triggered - Turn InTangible ");
 
             }
         }

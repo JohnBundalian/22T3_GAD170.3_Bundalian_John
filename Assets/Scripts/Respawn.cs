@@ -6,21 +6,26 @@ namespace JohnBundalian
 {
     public class Respawn : MonoBehaviour
     {
-        [SerializeField] GameObject player;
-        [SerializeField] Transform spawnPoint;
-        [SerializeField] float spawnValue;
 
-        private void Update()
+        // When subscribed to the event.
+        private void OnEnable()
         {
-            if(player.transform.position.y < -spawnValue)
-            {
-                RespawnPoint();
-            }
+            EventsManager.OnRespawning += Respawning;
         }
-        void RespawnPoint()
+
+        // When unsubsribed to the event.
+        private void OnDisable()
         {
-            transform.position = spawnPoint.position;
+            EventsManager.OnRespawning -= Respawning;
         }
+
+        // Player will relocate to allocated position imitating respawn.
+
+        private void Respawning()
+        {
+            transform.position = new Vector3(0, 0.5f, 0);
+            Debug.Log("Respawn");
+        }
+
     }
 }
-
